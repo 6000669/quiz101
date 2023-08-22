@@ -73,8 +73,8 @@ un resultado según se orienta en la imagen adjunta.
                
             res = [[tx, ty, tz], [tx + lado, ty, tz], [tx + lado, ty, tz + lado], [tx, ty, tz + lado], [tx + lado/2, ty + altura,tz + lado/2], ]
 
-            document.getElementById("vert_ini").value = vert.slice(0, 5).join(", ");
-            document.getElementById("vert_end").value = res.slice(0, 5).join(", ");
+            document.getElementById("vert_ini").value = vert.slice(0, 5).join("] ");
+            document.getElementById("vert_end").value = res.slice(0, 5).join("], ");
         }
         function matrizTraslacion(tx, ty, tz) {
             return [
