@@ -52,12 +52,10 @@ un resultado según se orienta en la imagen adjunta.
 
             function traslacionPiramide(matriz, vector) {
                 var resultado = [];
-                for(var i = 0; i <= matriz.length; i++)
-                {
+                for (var i = 0; i < matriz.length; i++) {
                     var sum = 0;
-                    for(var j = 0; j <= vector.length; j++)
-                    {
-                        sum += matriz[i][j] + vector[j];
+                    for (var j = 0; j < vector.length; j++) {
+                        sum += matriz[i][j] * vector[j];
                     }
                     resultado.push(sum);
                 }
@@ -69,14 +67,14 @@ un resultado según se orienta en la imagen adjunta.
             tx = vt[0];
             ty = vt[1];
             tz = vt[2];
-            base = parseFloat(byId("width"));
+            lado = parseFloat(byId("width"));
             altura = parseFloat(byId("height"));
-            var matrizTrasl = matrizTraslacion(tx, ty, tz);
-            var vert = vertices(base, altura);
-            var resultado = traslacionPiramide(vert, vt);
-            vt.push(1);
+            var vert = vertices(lado, altura);
+               
+            res = [[tx, ty, tz], [tx + lado, ty, tz], [tx + lado, ty, tz + lado], [tx, ty, tz + lado], [tx + lado/2, ty + altura,tz + lado/2], ]
+
             document.getElementById("vert_ini").value = vert.slice(0, 5).join(", ");
-            document.getElementById("vert_end").value = resultado.slice(0, 5).join(", ");
+            document.getElementById("vert_end").value = res.slice(0, 5).join(", ");
         }
         function matrizTraslacion(tx, ty, tz) {
             return [
