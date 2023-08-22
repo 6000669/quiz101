@@ -50,32 +50,33 @@ un resultado según se orienta en la imagen adjunta.
                 return [[0, 0, 0], [lado, 0, 0], [lado, 0, lado], [0, 0, lado], [lado/2, altura, lado/2], ];
             }
 
-            function multiplicarMatrizVector(matriz, vector) {
-            var resultado = [];
-            for (var i = 0; i < matriz.length; i++) {
-                var sum = 0;
-                for (var j = 0; j < vector.length; j++) {
-                    sum += matriz[i][j] * vector[j];
+            function traslacionPiramide(matriz, vector) {
+                var resultado = [];
+                for(var i = 0; i <= matriz.length; i++)
+                {
+                    var sum = 0;
+                    for(var j = 0; j <= vector.length; j++)
+                    {
+                        sum += matriz[i][j] + vector[j];
+                    }
+                    resultado.push(sum);
                 }
-                resultado.push(sum);
+                return resultado;
             }
-            return resultado;
-        }
 
         function traslacion() {
             var vt = strarr2num(byId("vt"), ",");
             tx = vt[0];
             ty = vt[1];
             tz = vt[2];
-            var base = parseFloat(byId("width"));
-            var altura = parseFloat(byId("height"));
-
+            base = parseFloat(byId("width"));
+            altura = parseFloat(byId("height"));
             var matrizTrasl = matrizTraslacion(tx, ty, tz);
             var vert = vertices(base, altura);
-            var resultado = multiplicarMatrizVector(matrizTrasl, vert);
+            var resultado = traslacionPiramide(vert, vt);
             vt.push(1);
-            document.getElementById("vert_ini").value = vert.slice(0, 3).join(", ");
-            document.getElementById("vert_end").value = resultado.slice(0, 3).join(", ");
+            document.getElementById("vert_ini").value = vert.slice(0, 5).join(", ");
+            document.getElementById("vert_end").value = resultado.slice(0, 5).join(", ");
         }
         function matrizTraslacion(tx, ty, tz) {
             return [
