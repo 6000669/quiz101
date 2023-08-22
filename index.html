@@ -1,0 +1,93 @@
+<!-- 
+
+Asuma una pirámide recta de base cuadrada, ubicada de tal forma que dos de los lados de su base
+coinciden con los ejes X y Z.
+Completar el siguiente codigo de programa javascript incrustado en código html para presentar
+un resultado según se orienta en la imagen adjunta.
+
+    Debe utilizar (completando previamente su contenido) las funciones referidas a continuación:
+    
+    // Debe retornar un arreglo de 5 arreglos (arreglo de vertices que conforman la pirámide)
+    // en otras paalabras una matriz de 5 filas por 3 columnas
+    function vertices(lado, altura) {
+        return [[0, 0, 0], [lado, 0, 0], ...];
+    }
+
+    // Debe retornar la matriz de vertices matrVert, posterior a la aplicación de traslación
+    // según el vector vt
+    function traslacionPiramide(matrVert, vt) {
+    
+    }
+    
+    // NOTA IMPORTANTE:
+    // Si es necesario incluya funciones adicionales que pueda requerir y faciliten su trabajo
+-->
+<html>
+    <head>
+    </head>
+    <body>
+        <h1>Traslación de una pirámidde</h1>
+        <p>Lado base <input id="width" size=1/></p>
+        <p>Altura <input id="height" size=1/></p>
+        <p>Vector traslación <input id="vt" size=8/></p>
+        <script>
+             function byId(id) 
+             {
+                return document.getElementById(id).value;
+             }
+
+            function strarr2num(arreglo, lim) 
+            {
+                var arrs = arreglo.split(lim);
+                arrn = [];
+                arrs.forEach((elem) => {
+                    arrn.push(Number(elem));
+                });
+                return arrn;
+            }
+            function vertices(lado, altura) 
+            {
+                return [[0, 0, 0], [lado, 0, 0], [lado, 0, lado], [0, 0, lado], [lado/2, altura, lado/2], ];
+            }
+
+            function multiplicarMatrizVector(matriz, vector) {
+            var resultado = [];
+            for (var i = 0; i < matriz.length; i++) {
+                var sum = 0;
+                for (var j = 0; j < vector.length; j++) {
+                    sum += matriz[i][j] * vector[j];
+                }
+                resultado.push(sum);
+            }
+            return resultado;
+        }
+
+        function traslacion() {
+            var vt = strarr2num(byId("vt"), ",");
+            tx = vt[0];
+            ty = vt[1];
+            tz = vt[2];
+            var base = parseFloat(byId("width"));
+            var altura = parseFloat(byId("height"));
+
+            var matrizTrasl = matrizTraslacion(tx, ty, tz);
+            var vert = vertices(base, altura);
+            var resultado = multiplicarMatrizVector(matrizTrasl, vert);
+            vt.push(1);
+            document.getElementById("vert_ini").value = vert.slice(0, 3).join(", ");
+            document.getElementById("vert_end").value = resultado.slice(0, 3).join(", ");
+        }
+        function matrizTraslacion(tx, ty, tz) {
+            return [
+                [1, 0, 0, tx],
+                [0, 1, 0, ty],
+                [0, 0, 1, tz],
+                [0, 0, 0, 1]
+            ];
+        }
+        </script>
+        <button id="btn_tr" onclick="traslacion()">Realizar traslación</button>
+        <p>Vertices posición inicial <input id="vert_ini" size=50/></p>
+        <p>Vertices posición final <input id="vert_end" size=50/></p>
+    </body>
+</html>
